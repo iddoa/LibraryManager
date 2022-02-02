@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "name": "Bob",
+      "id": 123,
+      "books": [1,2]
+    },
+    {
+      "name": "mary",
+      "id": 345,
+      "books": [3]
+    },
+    {
+      "name": "iddo",
+      "id": 200,
+      "books": [4,5]
+    }
+  ]
+}

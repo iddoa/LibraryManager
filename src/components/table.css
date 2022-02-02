@@ -1,0 +1,9 @@
+.app-table {
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+.app-list {
+    flex: 1;
+}
