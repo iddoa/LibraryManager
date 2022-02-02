@@ -5,7 +5,7 @@ import './list-styles.css';
 
 
 
-class GenericList extends React.Component {
+class LibraryList extends React.Component {
     render() {
         return (
             <div>
@@ -18,4 +18,4 @@ class GenericList extends React.Component {
     };
 }
 
-export default GenericList;
+export default LibraryList;

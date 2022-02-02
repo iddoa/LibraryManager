@@ -8,6 +8,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function NewUserDialog(props) {
+    const handleSubmit = () => {
+        props.onSubmit("aaa");
+        props.onClose();
+    }
     return (
         <Dialog open={props.open} onClose={props.onClose}>
             <DialogTitle>New User</DialogTitle>
@@ -35,7 +39,7 @@ export default function NewUserDialog(props) {
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.onClose}>Cancel</Button>
-                <Button onClick={props.onClose}>Add User</Button>
+                <Button onClick={handleSubmit}>Add User</Button>
             </DialogActions>
         </Dialog>
     );

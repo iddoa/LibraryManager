@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Tooltip from '@mui/material/Tooltip';
 import "./user.css";
 
-class User extends React.Component {
+class UserItem extends React.Component {
     constructor(props) {
         super(props);
         this.user = props.user;
@@ -41,4 +41,4 @@ class User extends React.Component {
     };
 }
 
-export default User;
+export default UserItem;
