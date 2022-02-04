@@ -8,7 +8,7 @@ import BookItem from "./BookItem";
 import LibraryList from "./LibraryList";
 import UserItem from "./UserItem";
 import NewUserDialogButton from "./NewUserDialogButton";
-import BorrowBookDialogButton from "./BorrowBookDialogButton";
+import BorrowBookDialogHandler from "./BorrowBookDialogHandler";
 
 
 function fetchUsers() {
@@ -26,6 +26,8 @@ class ManageUsers extends React.Component {
             users: fetchUsers(),
             books: fetchBooks(),
             selectedUser: null,
+            loading: false,
+            alldata: null
         }
         this.setSelectedUser = (user) => {
             console.log('clicked');
@@ -43,16 +45,23 @@ class ManageUsers extends React.Component {
             //     arrayvar: [...prevState.arrayvar, newelement]
             // }))
         };
-
+        this.getLists();
     }
 
-    getAvailableBooksListItems() {
-        return this.state.books.map((book) => {
-            return (
-                <BookItem key={book.id} book={book} favorite={false} updateFavorite={() => {}}/>
-            );
+    getLists() {
+        this.setState({ loading: true }, () => {
+            fetch("http://localhost:3000/users")
+                .then(res => res.json())
+                .then(result =>
+                    this.setState({
+                        loading: false,
+                        alldata: result
+                    })
+                )
+                .catch(console.log);
         });
     }
+
 
     getSelectedBooksListItems() {
         return this.state.books.filter(book =>
@@ -86,10 +95,13 @@ class ManageUsers extends React.Component {
                         deleteUser={this.deleteUser}
                         editUser={this.editUser}
                     />
-                    <Divider />
                 </div>
             );
         });
+    }
+
+    addBooksToUser(booksIds) {
+        console.log(booksIds);
     }
 
     getBooksHeader() {
@@ -97,7 +109,10 @@ class ManageUsers extends React.Component {
         return (
             <ListSubheader className={"list-subheader"}>
                 {(user ? user.name + "'s " : "") + "Books"}
-                <BorrowBookDialogButton user={user} bookItems={this.getAvailableBooksListItems()}/>
+                <BorrowBookDialogHandler
+                    user={user}
+                    books={this.state.books}
+                    handleAddBooks={(booksIds) => this.addBooksToUser(booksIds)}/>
             </ListSubheader>
         )
     }

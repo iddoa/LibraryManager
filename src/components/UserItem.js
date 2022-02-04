@@ -19,6 +19,7 @@ class UserItem extends React.Component {
             <ListItem
                 disablePadding
                 key={this.user.id}
+                divider={true}
                 secondaryAction={
                     <div className={"user-item-buttons"}>
                         <NewUserDialogButton
