@@ -7,3 +7,8 @@
 .app-list {
     flex: 1;
 }
+.list-subheader  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

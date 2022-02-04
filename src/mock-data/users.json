@@ -3,17 +3,20 @@
     {
       "name": "Bob",
       "id": 123,
-      "books": [1,2]
+      "books": [1,2],
+      "favoriteBooks": [2]
     },
     {
       "name": "mary",
       "id": 345,
-      "books": [3]
+      "books": [3],
+      "favoriteBooks": []
     },
     {
       "name": "iddo",
       "id": 200,
-      "books": [4,5]
+      "books": [4,5],
+      "favoriteBooks": [4]
     }
   ]
 }

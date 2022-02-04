@@ -4,9 +4,9 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import EditIcon from '@mui/icons-material/Edit';
 import Tooltip from '@mui/material/Tooltip';
-import "./user.css";
+import "./UserItem.css";
+import NewUserDialogButton from "./NewUserDialogButton";
 
 class UserItem extends React.Component {
     constructor(props) {
@@ -18,13 +18,15 @@ class UserItem extends React.Component {
         return (
             <ListItem
                 disablePadding
+                key={this.user.id}
                 secondaryAction={
-                    <div>
-                        <Tooltip title="Edit">
-                            <IconButton edge="end" onClick={() => this.props.editUser(this.user.id)} className={"edit-user-button"}>
-                                <EditIcon />
-                            </IconButton>
-                        </Tooltip>
+                    <div className={"user-item-buttons"}>
+                        <NewUserDialogButton
+                            username={this.user.name}
+                            userId={this.user.id}
+                            editMode={true}
+                            handleSubmit={(user) => this.props.editUser(this.user, user)}
+                        />
                         <Tooltip title="Delete">
                             <IconButton edge="end" onClick={() => this.props.deleteUser(this.user.id)} className={"delete-user-button"}>
                                 <DeleteIcon />

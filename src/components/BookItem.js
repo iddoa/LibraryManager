@@ -26,10 +26,11 @@ class BookItem extends React.Component {
             <div>
                 <ListItem
                     disablePadding
+                    key={this.book.id}
                     secondaryAction={
                         <div>
                             <Tooltip title="Favorite">
-                                <IconButton edge="end" onClick={() => this.props.editUser(this.user.id)} className={"favorite-book-button"}>
+                                <IconButton edge="end" onClick={() => this.props.updateFavorite()} className={"favorite-book-button"}>
                                     {favoriteIcon}
                                 </IconButton>
                             </Tooltip>
@@ -44,7 +45,6 @@ class BookItem extends React.Component {
                 >
                     <ListItemButton>
                         <ListItemText primary={this.book.title} secondary={this.getAuthor()} />
-
                     </ListItemButton>
                 </ListItem>
                 <Divider />
