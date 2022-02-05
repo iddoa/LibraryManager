@@ -1,0 +1,81 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Rich Dad Poor Dad",
+      "author": "Robert Kiyosaki"
+    },
+    {
+      "id": 2,
+      "title": "Predictably Irrational, The hidden forces that shape our decisions",
+      "author": "Dan Arieli"
+    },
+    {
+      "id": 3,
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "author": "J.K. Rolling"
+    },
+    {
+      "id": 4,
+      "title": "Harry Potter and the Prisoner of Azkaban",
+      "author": "J.K. Rolling"
+    },
+    {
+      "id": 5,
+      "title": "Harry Potter and the Half Blooded Prince",
+      "author": "J.K. Rolling"
+    },
+    {
+      "id": 6,
+      "title": "The Lord of the Rings",
+      "author": "J.R.R Tolkien"
+    }
+  ],
+  "users": [
+    {
+      "name": "Bob",
+      "id": 123,
+      "books": [
+        1,
+        2
+      ],
+      "favoriteBooks": [
+        2
+      ]
+    },
+    {
+      "name": "mary",
+      "id": 345,
+      "books": [
+        3
+      ],
+      "favoriteBooks": []
+    },
+    {
+      "name": "iddo",
+      "id": 200,
+      "books": [
+        4,
+        5
+      ],
+      "favoriteBooks": [
+        4
+      ]
+    },
+    {
+      "name": "Roni",
+      "id": "444",
+      "books": []
+    },
+    {
+      "name": "HHH",
+      "id": "222",
+      "books": []
+    },
+    {
+      "name": "tttt",
+      "id": "666",
+      "books": []
+    }
+  ]
+}

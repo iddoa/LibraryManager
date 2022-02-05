@@ -24,7 +24,7 @@ export default function BorrowBookDialogHandler(props) {
 
     const bookItems = props.books.map((book) => {
         return (
-            <AvialableBookItem book={book} handleToggle={handleToggle}/>
+            <AvialableBookItem key={book.id} book={book} handleToggle={handleToggle}/>
         );
     });
 

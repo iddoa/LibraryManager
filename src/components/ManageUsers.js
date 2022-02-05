@@ -1,7 +1,5 @@
 import React from 'react';
 import ListSubheader from '@mui/material/ListSubheader';
-import users from "../mock-data/users";
-import books from "../mock-data/books";
 import './ManageUsers.css';
 import Divider from '@mui/material/Divider';
 import BookItem from "./BookItem";
@@ -10,27 +8,20 @@ import UserItem from "./UserItem";
 import NewUserDialogButton from "./NewUserDialogButton";
 import BorrowBookDialogHandler from "./BorrowBookDialogHandler";
 
-
-function fetchUsers() {
-    return users.users;
-}
-
-function fetchBooks() {
-    return books.books;
-}
+const BASE_SERVER_URL = "http://localhost:4000";
+const USERS_PATH = BASE_SERVER_URL + "/users";
+const BOOKS_PATH = BASE_SERVER_URL + "/books";
 
 class ManageUsers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: fetchUsers(),
-            books: fetchBooks(),
+            users: [],
+            books: [],
             selectedUser: null,
             loading: false,
-            alldata: null
         }
         this.setSelectedUser = (user) => {
-            console.log('clicked');
             this.setState({selectedUser: user});
         };
 
@@ -45,21 +36,45 @@ class ManageUsers extends React.Component {
             //     arrayvar: [...prevState.arrayvar, newelement]
             // }))
         };
-        this.getLists();
+
+
     }
 
-    getLists() {
+    fetchUsers() {
         this.setState({ loading: true }, () => {
-            fetch("http://localhost:3000/users")
+            fetch(USERS_PATH)
                 .then(res => res.json())
                 .then(result =>
                     this.setState({
                         loading: false,
-                        alldata: result
+                        users: result
                     })
                 )
                 .catch(console.log);
         });
+    }
+
+    fetchBooks() {
+        this.setState({ loading: true }, () => {
+            fetch(BOOKS_PATH)
+                .then(res => res.json())
+                .then(result =>
+                    this.setState({
+                        loading: false,
+                        books: result
+                    })
+                )
+                .catch(console.log);
+        });
+    }
+
+    componentDidMount() {
+        this.getLists();
+    }
+
+    getLists() {
+        this.fetchUsers();
+        this.fetchBooks();
     }
 
 
@@ -69,19 +84,28 @@ class ManageUsers extends React.Component {
             .map((book) => {
                 const favorite = this.state.selectedUser.favoriteBooks.includes(book.id);
                 return (
-                    <BookItem key={book.id} book={book} favorite={favorite} updateFavorite={() => this.updateFavorite(book.id, favorite)}/>
+                    <BookItem key={"book-item"+book.id} book={book} favorite={favorite} updateFavorite={() => this.updateFavorite(book.id, favorite)}/>
                 );
             });
     }
 
     updateFavorite(bookId, remove) {
         //TODO - this changes the order and causes problems
-        // const oldFavorites = this.state.selectedUser.favoriteBooks;
-        // const newFavorite = remove ? oldFavorites.filter(id => id !== bookId) : [...oldFavorites, bookId]
-        // const updatedUser = {...this.state.selectedUser, favoriteBooks: newFavorite};
-        // const updatedUsers = this.state.users.filter(user => user.id !== this.state.selectedUser.id)
+        const selectedUser = this.state.selectedUser;
+        const oldFavorites = selectedUser.favoriteBooks;
+        const newFavorite = remove ? oldFavorites.filter(id => id !== bookId) : [...oldFavorites, bookId]
+        const updatedUser = {...selectedUser, favoriteBooks: newFavorite};
+        const updatedUsers = [...this.state.users.filter(user => user.id !== selectedUser.id), updatedUser];
         // this.setState({selectedUser: updatedUser,
         //                 users: [...updatedUsers, updatedUser]});
+        // this.updateUsers();
+        // const users = this.state.users;
+        fetch(USERS_PATH, {
+        // fetch('https://reqres.in/api/posts', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(updatedUser)
+        }).then(response => response.json());
     }
 
     getUsersListItems() {
@@ -89,6 +113,7 @@ class ManageUsers extends React.Component {
             return (
                 <div>
                     <UserItem
+                        key={"user-item"+user.id}
                         user={user}
                         isSelected={this.state.selectedUser && this.state.selectedUser.id === user.id}
                         userClicked={this.setSelectedUser}
@@ -118,8 +143,18 @@ class ManageUsers extends React.Component {
     }
 
     newUser(newUser) {
-        const updatedUsers = [...this.state.users, newUser];
-        this.setState({users: updatedUsers});
+        fetch(USERS_PATH, {
+            // fetch('https://reqres.in/api/posts', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newUser)
+        })
+            .then(response => response.json())
+            .then((data) => {
+                const updatedUsers = [...this.state.users, data];
+                this.setState({users: updatedUsers});
+            })
+            .catch(e => console.log(e));
     }
 
     getUsersHeader() {
