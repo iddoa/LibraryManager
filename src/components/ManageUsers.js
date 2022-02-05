@@ -17,17 +17,27 @@ class ManageUsers extends React.Component {
         super(props);
         this.state = {
             users: [],
-            books: [],
+            freeBooks: [],
             selectedUser: null,
+            selectedBooks: null,
             loading: false,
         }
         this.setSelectedUser = (user) => {
             this.setState({selectedUser: user});
+            this.fetchSelectedBooks(user.id);
         };
 
-        this.deleteUser = (userId) => {
-            const newUsers = this.state.users.filter(user => user.id !== userId);
-            this.setState({users: newUsers});
+        this.deleteUser = (id) => {
+            // const newUsers = this.state.users.filter(user => user.id !== userId);
+            // this.setState({users: newUsers});
+            const userPath = USERS_PATH + "/" + id + "/";
+            fetch(userPath, {method: 'DELETE'})
+                .then(response => response.json())
+                .then((data) => {
+                    const updatedUsers = this.state.users.filter(user => user.id !== id);
+                    this.setState({users: updatedUsers});
+                })
+                .catch(e => console.log(e));
         };
 
         this.editUser = (oldUser, newUser) => {
@@ -54,14 +64,15 @@ class ManageUsers extends React.Component {
         });
     }
 
-    fetchBooks() {
+    fetchFreeBooks() {
+        const freeBooksPath = BOOKS_PATH + "?borrowedBy=-1";
         this.setState({ loading: true }, () => {
-            fetch(BOOKS_PATH)
+            fetch(freeBooksPath)
                 .then(res => res.json())
                 .then(result =>
                     this.setState({
                         loading: false,
-                        books: result
+                        freeBooks: result
                     })
                 )
                 .catch(console.log);
@@ -69,43 +80,83 @@ class ManageUsers extends React.Component {
     }
 
     componentDidMount() {
-        this.getLists();
-    }
-
-    getLists() {
         this.fetchUsers();
-        this.fetchBooks();
+        this.fetchFreeBooks();
     }
 
+    fetchCurrentBooks() {
+        const id = this.state.selectedUser.id;
+        this.fetchSelectedBooks(id);
+    }
+
+    fetchSelectedBooks(id) {
+        const selectedBooksPath = BOOKS_PATH + "?borrowedBy=" + id;
+        this.setState({ loading: true }, () => {
+            fetch(selectedBooksPath)
+                .then(res => res.json())
+                .then(result =>
+                    this.setState({
+                        loading: false,
+                        selectedBooks: result
+                    })
+                )
+                .catch(console.log);
+        });
+    }
 
     getSelectedBooksListItems() {
-        return this.state.books.filter(book =>
-            this.state.selectedUser && this.state.selectedUser.books.includes(book.id))
+        const user = this.state.selectedUser;
+        const selectedBooks = this.state.selectedBooks;
+        return selectedBooks ? this.state.selectedBooks
             .map((book) => {
-                const favorite = this.state.selectedUser.favoriteBooks.includes(book.id);
                 return (
-                    <BookItem key={"book-item"+book.id} book={book} favorite={favorite} updateFavorite={() => this.updateFavorite(book.id, favorite)}/>
+                    <BookItem
+                        key={"book-item"+book.id}
+                        book={book}
+                        user={user}
+                        removeBook={() => this.removeBorrowerFromBook(book)}
+                        favorite={book.favorite}
+                        updateFavorite={() => this.updateFavorite(book)}/>
                 );
-            });
+            }) : [];
     }
 
-    updateFavorite(bookId, remove) {
-        //TODO - this changes the order and causes problems
-        const selectedUser = this.state.selectedUser;
-        const oldFavorites = selectedUser.favoriteBooks;
-        const newFavorite = remove ? oldFavorites.filter(id => id !== bookId) : [...oldFavorites, bookId]
-        const updatedUser = {...selectedUser, favoriteBooks: newFavorite};
-        const updatedUsers = [...this.state.users.filter(user => user.id !== selectedUser.id), updatedUser];
-        // this.setState({selectedUser: updatedUser,
-        //                 users: [...updatedUsers, updatedUser]});
-        // this.updateUsers();
-        // const users = this.state.users;
-        fetch(USERS_PATH, {
-        // fetch('https://reqres.in/api/posts', {
-            method: 'POST',
+    updateFavorite(book) {
+        const bookPath = BOOKS_PATH + "/" + book.id;
+        const newBook = {...book, favorite: !book.favorite};
+        fetch(bookPath, {
+            method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(updatedUser)
-        }).then(response => response.json());
+            body: JSON.stringify(newBook)
+        })
+            .then(response => response.json())
+            .then(newBook => {
+                this.updateBook(newBook);
+            });
+    }
+    removeBorrowerFromBook(book) {
+        const bookPath = BOOKS_PATH + "/" + book.id;
+        const newBook = {...book, borrowedBy: -1};
+        fetch(bookPath, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newBook)
+        })
+            .then(response => response.json())
+            .then(newBook => {
+                this.updateBook(newBook);
+                this.fetchCurrentBooks();
+            });
+    }
+    updateBook(newBook) {
+        const newSelectedBooks = this.state.selectedBooks
+            .map(book => {
+                if (book.id === newBook.id) {
+                    return newBook;
+                }
+                return book;
+            })
+        this.setState({selectedBooks: newSelectedBooks});
     }
 
     getUsersListItems() {
@@ -136,7 +187,7 @@ class ManageUsers extends React.Component {
                 {(user ? user.name + "'s " : "") + "Books"}
                 <BorrowBookDialogHandler
                     user={user}
-                    books={this.state.books}
+                    books={this.state.freeBooks}
                     handleAddBooks={(booksIds) => this.addBooksToUser(booksIds)}/>
             </ListSubheader>
         )
@@ -144,7 +195,6 @@ class ManageUsers extends React.Component {
 
     newUser(newUser) {
         fetch(USERS_PATH, {
-            // fetch('https://reqres.in/api/posts', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newUser)

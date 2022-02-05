@@ -5,12 +5,12 @@ import ListItemButton from '@mui/material/ListItemButton';
 import IconButton from '@mui/material/IconButton';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
-import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import Tooltip from '@mui/material/Tooltip';
+import RemoveBookButton from "./RemoveBookButton";
+import './BookItem.css';
 
 
 export default function BookItem(props) {
-    const user = props.user;
     const book = props.book;
     const favoriteIcon = props.favorite ? (<StarIcon />) : (<StarBorderOutlinedIcon />) ;
     return (
@@ -20,19 +20,14 @@ export default function BookItem(props) {
                 key={book.id}
                 divider={true}
                 secondaryAction={
-                    <div>
+                    <div className={"book-item-buttons"}>
                         <Tooltip title="Favorite">
                             <IconButton edge="end" onClick={() => props.updateFavorite()} className={"favorite-book-button"}>
                                 {favoriteIcon}
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title="Return Book">
-                            <IconButton edge="end" onClick={() => props.deleteUser(user.id)} className={"remove-book-button"}>
-                                <BookmarkRemoveIcon />
-                            </IconButton>
-                        </Tooltip>
+                        <RemoveBookButton removeBook={() => props.removeBook()}/>
                     </div>
-
                 }
             >
                 <ListItemButton>

@@ -27,7 +27,7 @@ class NewUserDialog extends React.Component {
     }
     handleSubmit() {
         if (this.validateForm()) {
-            const newUser = {name: this.state.username, id: this.state.userId, books:[]};
+            const newUser = {name: this.state.username, userId: this.state.userId, favoritesBooks: []};
             this.props.handleSubmit(newUser);
             this.handleClose();
         }

@@ -51,7 +51,7 @@ export default function BorrowBookDialogHandler(props) {
                 variant="outlined"
                 onClick={() => setOpen(true)}
                 endIcon={<MenuBookIcon />}
-                disabled={!props.user}
+                disabled={!props.user || props.books.length === 0}
             >
                 Borrow Book
             </Button>

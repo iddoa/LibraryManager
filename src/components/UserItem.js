@@ -18,7 +18,7 @@ export default function UserItem(props) {
                 <div className={"user-item-buttons"}>
                     <NewUserDialogButton
                         username={props.user.name}
-                        userId={props.user.id}
+                        userId={props.user.userId}
                         editMode={true}
                         handleSubmit={(user) => props.editUser(props.user, user)}
                     />
@@ -31,7 +31,7 @@ export default function UserItem(props) {
             }
         >
             <ListItemButton onClick={() => props.userClicked(props.user)} selected={props.isSelected}>
-                <ListItemText primary={props.user.name} secondary={props.user.id} className={"user-text"}/>
+                <ListItemText primary={props.user.name} secondary={props.user.userId} className={"user-text"}/>
             </ListItemButton>
         </ListItem>
     );

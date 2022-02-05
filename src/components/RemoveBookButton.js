@@ -6,7 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 
 
-export default function RemoveBookButton() {
+export default function RemoveBookButton(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -15,6 +15,11 @@ export default function RemoveBookButton() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const removeBook = () => {
+        props.removeBook();
+        handleClose();
+    }
+
 
     return (
         <div>
@@ -38,7 +43,7 @@ export default function RemoveBookButton() {
                     horizontal: 'left',
                 }}
             >
-                <MenuItem onClick={handleClose}>Return Book</MenuItem>
+                <MenuItem onClick={removeBook}>Return Book</MenuItem>
                 <MenuItem onClick={handleClose}>Cancel</MenuItem>
             </Menu>
         </div>

@@ -3,79 +3,101 @@
     {
       "id": 1,
       "title": "Rich Dad Poor Dad",
-      "author": "Robert Kiyosaki"
+      "author": "Robert Kiyosaki",
+      "borrowedBy": -1,
+      "favorite": false
     },
     {
       "id": 2,
       "title": "Predictably Irrational, The hidden forces that shape our decisions",
-      "author": "Dan Arieli"
+      "author": "Dan Arieli",
+      "borrowedBy": -1,
+      "favorite": false,
+      "borrower": -1
     },
     {
       "id": 3,
       "title": "Harry Potter and the Sorcerer's Stone",
-      "author": "J.K. Rolling"
+      "author": "J.K. Rowling",
+      "borrowedBy": 3,
+      "favorite": true
     },
     {
       "id": 4,
       "title": "Harry Potter and the Prisoner of Azkaban",
-      "author": "J.K. Rolling"
+      "author": "J.K. Rowling",
+      "borrowedBy": -1,
+      "favorite": false
     },
     {
       "id": 5,
       "title": "Harry Potter and the Half Blooded Prince",
-      "author": "J.K. Rolling"
+      "author": "J.K. Rowling",
+      "borrowedBy": 3,
+      "favorite": false
     },
     {
       "id": 6,
-      "title": "The Lord of the Rings",
-      "author": "J.R.R Tolkien"
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "author": "J.R.R Tolkien",
+      "borrowedBy": 3,
+      "favorite": true
+    },
+    {
+      "id": 7,
+      "title": "The Lord of the Rings: The Two Towers",
+      "author": "J.R.R Tolkien",
+      "borrowedBy": 2,
+      "favorite": false
+    },
+    {
+      "id": 8,
+      "title": "The Lord of the Rings: The Return Of The King",
+      "author": "J.R.R Tolkien",
+      "borrowedBy": -1,
+      "favorite": false
     }
   ],
   "users": [
     {
       "name": "Bob",
-      "id": 123,
-      "books": [
-        1,
-        2
-      ],
+      "id": 1,
+      "userId": 53434,
       "favoriteBooks": [
         2
       ]
     },
     {
       "name": "mary",
-      "id": 345,
-      "books": [
-        3
-      ],
+      "id": 2,
+      "userId": 8473639,
       "favoriteBooks": []
     },
     {
       "name": "iddo",
-      "id": 200,
-      "books": [
-        4,
-        5
-      ],
+      "userId": 2342354,
+      "id": 3,
       "favoriteBooks": [
         4
       ]
     },
     {
-      "name": "Roni",
-      "id": "444",
-      "books": []
+      "name": "Jim",
+      "userId": "5555",
+      "favoritesBooks": [],
+      "id": 4
     },
     {
-      "name": "HHH",
-      "id": "222",
-      "books": []
+      "name": "JJJ",
+      "userId": "5555",
+      "favoritesBooks": [],
+      "id": 5
     },
     {
-      "name": "tttt",
-      "id": "666",
-      "books": []
+      "name": "YoYo",
+      "userId": "999",
+      "favoritesBooks": [],
+      "id": 6
     }
   ]
 }
