@@ -4,15 +4,15 @@
       "id": 1,
       "title": "Rich Dad Poor Dad",
       "author": "Robert Kiyosaki",
-      "borrowedBy": -1,
+      "borrowedBy": 1,
       "favorite": false
     },
     {
       "id": 2,
       "title": "Predictably Irrational, The hidden forces that shape our decisions",
       "author": "Dan Arieli",
-      "borrowedBy": -1,
-      "favorite": false,
+      "borrowedBy": 8,
+      "favorite": true,
       "borrower": -1
     },
     {
@@ -26,7 +26,7 @@
       "id": 4,
       "title": "Harry Potter and the Prisoner of Azkaban",
       "author": "J.K. Rowling",
-      "borrowedBy": -1,
+      "borrowedBy": 5,
       "favorite": false
     },
     {
@@ -47,57 +47,58 @@
       "id": 7,
       "title": "The Lord of the Rings: The Two Towers",
       "author": "J.R.R Tolkien",
-      "borrowedBy": 2,
+      "borrowedBy": -1,
       "favorite": false
     },
     {
       "id": 8,
       "title": "The Lord of the Rings: The Return Of The King",
       "author": "J.R.R Tolkien",
-      "borrowedBy": -1,
+      "borrowedBy": 5,
       "favorite": false
     }
   ],
   "users": [
     {
-      "name": "Bob",
-      "id": 1,
-      "userId": 53434,
-      "favoriteBooks": [
-        2
-      ]
+      "name": "Bob223",
+      "userId": "5343413",
+      "id": 1
     },
     {
       "name": "mary",
       "id": 2,
-      "userId": 8473639,
-      "favoriteBooks": []
+      "userId": 8473639
     },
     {
       "name": "iddo",
       "userId": 2342354,
-      "id": 3,
-      "favoriteBooks": [
-        4
-      ]
+      "id": 3
     },
     {
       "name": "Jim",
       "userId": "5555",
-      "favoritesBooks": [],
       "id": 4
     },
     {
       "name": "JJJ",
       "userId": "5555",
-      "favoritesBooks": [],
       "id": 5
     },
     {
       "name": "YoYo",
       "userId": "999",
-      "favoritesBooks": [],
       "id": 6
+    },
+    {
+      "name": "aaa",
+      "userId": "99",
+      "favoritesBooks": [],
+      "id": 7
+    },
+    {
+      "name": "Ron123",
+      "userId": "78987",
+      "id": 8
     }
   ]
 }

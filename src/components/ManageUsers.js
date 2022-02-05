@@ -28,9 +28,7 @@ class ManageUsers extends React.Component {
         };
 
         this.deleteUser = (id) => {
-            // const newUsers = this.state.users.filter(user => user.id !== userId);
-            // this.setState({users: newUsers});
-            const userPath = USERS_PATH + "/" + id + "/";
+            const userPath = USERS_PATH + "/" + id + "/id";
             fetch(userPath, {method: 'DELETE'})
                 .then(response => response.json())
                 .then((data) => {
@@ -40,11 +38,17 @@ class ManageUsers extends React.Component {
                 .catch(e => console.log(e));
         };
 
-        this.editUser = (oldUser, newUser) => {
-            // this.setState(prevState => ({
-            //     const newUsers = prevState.arrayvar
-            //     arrayvar: [...prevState.arrayvar, newelement]
-            // }))
+        this.editUser = (newUser) => {
+            const userPath = USERS_PATH + "/" + newUser.id;
+            fetch(userPath, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(newUser)
+            })
+                .then(response => response.json())
+                .then(newUser => {
+                    this.updateUser(newUser);
+                });
         };
 
 
@@ -136,7 +140,7 @@ class ManageUsers extends React.Component {
     }
     removeBorrowerFromBook(book) {
         const bookPath = BOOKS_PATH + "/" + book.id;
-        const newBook = {...book, borrowedBy: -1};
+        const newBook = {...book, borrowedBy: -1, favorite: false};
         fetch(bookPath, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -159,6 +163,18 @@ class ManageUsers extends React.Component {
         this.setState({selectedBooks: newSelectedBooks});
     }
 
+    updateUser(newUser) {
+        const newSelectedBooks = this.state.users
+            .map(user => {
+                if (user.id === newUser.id) {
+                    return newUser;
+                }
+                return user;
+            })
+        this.setState({users: newSelectedBooks});
+        this.setState({selectedUser: newUser});
+    }
+
     getUsersListItems() {
         return this.state.users.map((user) => {
             return (
@@ -177,7 +193,26 @@ class ManageUsers extends React.Component {
     }
 
     addBooksToUser(booksIds) {
-        console.log(booksIds);
+        const userId = this.state.selectedUser.id;
+        const booksToAdd = this.state.freeBooks
+            .filter(book => booksIds.includes(book.id))
+            .map(book => ({...book, borrowedBy: userId}));
+
+        // { "op": "replace", "path": "/email", "value": "new.email@example.org" }
+
+        const bookPath = BOOKS_PATH + "/" + booksToAdd.map(book => book.id).join("&");
+        // const bookPath = BOOKS_PATH + "?" + booksToAdd.map(book => "id="+book.id).join("&");
+        fetch(bookPath, {
+            // method: 'PUT',
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({borrowedBy: userId})
+        })
+            .then(response => response.json())
+            .then(newBook => {
+                this.updateBook(newBook);
+                this.fetchCurrentBooks();
+            });
     }
 
     getBooksHeader() {

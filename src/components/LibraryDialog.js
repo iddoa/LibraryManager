@@ -11,7 +11,7 @@ export default function LibraryDialog(props) {
             {props.dialogContent}
             <DialogActions>
                 <Button onClick={() => props.handleClose()}>Cancel</Button>
-                <Button onClick={() => props.handleSubmit()}>{props.submitButtonText}</Button>
+                <Button onClick={() => props.handleSubmit()} disabled={props.disableSubmit}>{props.submitButtonText}</Button>
             </DialogActions>
         </Dialog>
     );

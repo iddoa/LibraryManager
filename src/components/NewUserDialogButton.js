@@ -10,11 +10,26 @@ class NewUserDialogButton extends React.Component {
         super(props);
         this.state = {
             open: false,
-        }
+            username: this.props.user && this.props.user.name || "",
+            userId: this.props.user && this.props.user.userId || "",
+            errors: {
+                username: false,
+                userId: false
+            }
+        };
     }
     toggleState(open) {
-        this.setState({open: open});
+        this.setState({
+            open: open,
+            username: open && this.props.user && this.props.user.name || "",
+            userId: open && this.props.user && this.props.user.userId || "",
+            errors: {
+                username: false,
+                userId: false
+            }
+        });
     }
+
     getButton() {
         if (this.props.editMode) {
             return (
@@ -31,6 +46,29 @@ class NewUserDialogButton extends React.Component {
         }
     };
 
+    validateForm() {
+        const errors = {
+            username: this.state.username === "",
+            userId: this.state.userId === ""
+        }
+        this.setState({errors: errors});
+        return Object.values(errors).every(x => !x);
+    }
+    handleSubmit() {
+        if (this.validateForm()) {
+            const newUser = {name: this.state.username, userId: this.state.userId};
+            if (this.props.editMode) {
+                newUser["id"] = this.props.user.id
+            }
+            this.props.handleSubmit(newUser);
+            this.toggleState(false);
+        }
+    }
+
+    updateUser(data) {
+        this.setState(data)
+    }
+
     render() {
         return (
             <div>
@@ -38,10 +76,16 @@ class NewUserDialogButton extends React.Component {
                 <NewUserDialog
                     open={this.state.open}
                     onClose={() => this.toggleState(false)}
-                    handleSubmit={this.props.handleSubmit}
-                    username={this.props.username}
-                    userId={this.props.userId}
+                    handleSubmit={() => this.handleSubmit()}
+                    user={this.props.user}
                     editMode={this.props.editMode}
+                    errors={this.state.errors}
+                    updateUser={(data) => this.updateUser(data)}
+                    disableSubmit={
+                        this.props.user &&
+                        this.state.username === this.props.user.name &&
+                        this.state.userId === this.props.user.userId
+                    }
                 />
             </div>
         );

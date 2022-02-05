@@ -17,10 +17,9 @@ export default function UserItem(props) {
             secondaryAction={
                 <div className={"user-item-buttons"}>
                     <NewUserDialogButton
-                        username={props.user.name}
-                        userId={props.user.userId}
+                        user={props.user}
                         editMode={true}
-                        handleSubmit={(user) => props.editUser(props.user, user)}
+                        handleSubmit={(user) => props.editUser(user)}
                     />
                     <Tooltip title="Delete">
                         <IconButton edge="end" onClick={() => props.deleteUser(props.user.id)} className={"delete-user-button"}>
