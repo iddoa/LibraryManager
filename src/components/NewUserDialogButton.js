@@ -10,8 +10,8 @@ class NewUserDialogButton extends React.Component {
         super(props);
         this.state = {
             open: false,
-            username: this.props.user && this.props.user.name || "",
-            userNumber: this.props.user && this.props.user.userNumber || "",
+            username: this.props.editMode ? this.props.user.name : "",
+            userNumber: this.props.editMode ? this.props.user.userNumber : "",
             errors: {
                 username: false,
                 userNumber: false
@@ -21,8 +21,8 @@ class NewUserDialogButton extends React.Component {
     toggleState(open) {
         this.setState({
             open: open,
-            username: open && this.props.user && this.props.user.name || "",
-            userNumber: open && this.props.user && this.props.user.userNumber || "",
+            username: this.props.editMode ? this.props.user.name : "",
+            userNumber: this.props.editMode ? this.props.user.userNumber : "",
             errors: {
                 username: false,
                 userNumber: false
@@ -56,9 +56,11 @@ class NewUserDialogButton extends React.Component {
     }
     handleSubmit() {
         if (this.validateForm()) {
-            const newUser = {name: this.state.username, userNumber: this.state.userNumber};
+            let newUser;
             if (this.props.editMode) {
-                newUser["id"] = this.props.user.id
+                newUser = {...this.props.user, name: this.state.username, userNumber: this.state.userNumber}
+            } else {
+                newUser = {name: this.state.username, userNumber: this.state.userNumber, books: []}
             }
             this.props.handleSubmit(newUser);
             this.toggleState(false);

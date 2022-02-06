@@ -26,7 +26,7 @@ export default function BookItem(props) {
                                 {favoriteIcon}
                             </IconButton>
                         </Tooltip>
-                        <RemoveBookButton removeBook={() => props.removeBook()}/>
+                        <RemoveBookButton removeBook={props.removeBook}/>
                     </div>
                 }
             >

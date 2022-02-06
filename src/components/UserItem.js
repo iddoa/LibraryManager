@@ -19,10 +19,10 @@ export default function UserItem(props) {
                     <NewUserDialogButton
                         user={props.user}
                         editMode={true}
-                        handleSubmit={(user) => props.editUser(user)}
+                        handleSubmit={(updatedUser) => props.editUser(updatedUser)}
                     />
                     <Tooltip title="Delete">
-                        <IconButton edge="end" onClick={() => props.deleteUser(props.user.id)} className={"delete-user-button"}>
+                        <IconButton edge="end" onClick={props.deleteUser} className={"delete-user-button"}>
                             <DeleteIcon />
                         </IconButton>
                     </Tooltip>

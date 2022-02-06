@@ -4,10 +4,12 @@ import Button from '@mui/material/Button';
 import LibraryDialog from "./LibraryDialog";
 import AvialableBookItem from "./AvailableBookItem";
 import List from '@mui/material/List';
+import {fetchBooks} from "./Provider";
 
 export default function BorrowBookDialogHandler(props) {
     const [open, setOpen] = useState(false);
     const [checked, setChecked] = useState([]);
+    const [allBooks, setAllBooks] = useState([]);
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -22,7 +24,9 @@ export default function BorrowBookDialogHandler(props) {
         setChecked(newChecked);
     };
 
-    const bookItems = props.books.map((book) => {
+    //Filter out already borrowed books
+    const usersBookIds = props.user && props.user.books.map(book => book.id);
+    const bookItems = allBooks.filter(book => !usersBookIds || !usersBookIds.includes(book.id)).map((book) => {
         return (
             <AvialableBookItem key={book.id} book={book} handleToggle={handleToggle}/>
         );
@@ -31,12 +35,21 @@ export default function BorrowBookDialogHandler(props) {
     const handleClose = () => {
         setChecked([]);
         setOpen(false);
-    }
+    };
+
+    const handleOpen = () => {
+        fetchBooks()
+            .then(result => {
+                setAllBooks(result);
+                setOpen(true);
+            })
+            .catch((error) => console.log(error));
+    };
 
     const handleSubmit = () => {
         props.handleAddBooks(checked);
         handleClose();
-    }
+    };
 
     const dialogContent = (
         <List>
@@ -49,9 +62,9 @@ export default function BorrowBookDialogHandler(props) {
         <div>
             <Button
                 variant="outlined"
-                onClick={() => setOpen(true)}
+                onClick={() => handleOpen()}
                 endIcon={<MenuBookIcon />}
-                disabled={!props.user || props.books.length === 0}
+                disabled={!props.user}
             >
                 Borrow Book
             </Button>

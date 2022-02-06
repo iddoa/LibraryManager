@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import ManageUsers from "./ManageUsers";
+import MainTab from "./MainTab";
 import ConstructionIcon from '@mui/icons-material/Construction';
 
 function TabPanel(props) {
@@ -61,7 +61,7 @@ export default function VerticalTabs() {
                 <Tab label="Manage Authors" {...a11yProps(2)} />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <ManageUsers />
+                <MainTab />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <Typography variant="h1" component="h1">
