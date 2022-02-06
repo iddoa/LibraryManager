@@ -1,7 +1,6 @@
 import UserItem from "./UserItem";
 import LibraryList from "./LibraryList";
 import ListSubheader from '@mui/material/ListSubheader';
-import NewUserDialogButton from "./NewUserDialogButton";
 
 export default function UserList(props) {
     const getUsersListItems = () => {
@@ -27,10 +26,7 @@ export default function UserList(props) {
                 listItems={getUsersListItems()}>
                 <ListSubheader className={"list-subheader"}>
                     Users
-                    <NewUserDialogButton
-                        handleSubmit={(newUser) => this.newUser(newUser)}
-                        editMode={false}
-                    />
+                    {props.children}
                 </ListSubheader>
             </LibraryList>
         </div>

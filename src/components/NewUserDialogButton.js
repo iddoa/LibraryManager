@@ -54,6 +54,7 @@ class NewUserDialogButton extends React.Component {
         this.setState({errors: errors});
         return Object.values(errors).every(x => !x);
     }
+
     handleSubmit() {
         if (this.validateForm()) {
             let newUser;

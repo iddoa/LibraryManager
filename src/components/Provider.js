@@ -33,3 +33,12 @@ export function updateUser(newUser) {
         .then(response => response.json());
 }
 
+export function addNewUser(newUser) {
+    return fetch(USERS_PATH, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newUser)
+    })
+        .then(response => response.json());
+}
+
