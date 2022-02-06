@@ -28,7 +28,8 @@ class ManageUsers extends React.Component {
         };
 
         this.deleteUser = (id) => {
-            const userPath = USERS_PATH + "/" + id + "/id";
+            //TODO change all bookborrwedBy
+            const userPath = USERS_PATH + "/" + id;
             fetch(userPath, {method: 'DELETE'})
                 .then(response => response.json())
                 .then((data) => {
@@ -193,10 +194,10 @@ class ManageUsers extends React.Component {
     }
 
     addBooksToUser(booksIds) {
-        const userId = this.state.selectedUser.id;
+        const userNumber = this.state.selectedUser.id;
         const booksToAdd = this.state.freeBooks
             .filter(book => booksIds.includes(book.id))
-            .map(book => ({...book, borrowedBy: userId}));
+            .map(book => ({...book, borrowedBy: userNumber}));
 
         // { "op": "replace", "path": "/email", "value": "new.email@example.org" }
 
@@ -206,7 +207,7 @@ class ManageUsers extends React.Component {
             // method: 'PUT',
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({borrowedBy: userId})
+            body: JSON.stringify({borrowedBy: userNumber})
         })
             .then(response => response.json())
             .then(newBook => {

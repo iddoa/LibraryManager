@@ -47,7 +47,7 @@
       "id": 7,
       "title": "The Lord of the Rings: The Two Towers",
       "author": "J.R.R Tolkien",
-      "borrowedBy": -1,
+      "borrowedBy": 1,
       "favorite": false
     },
     {
@@ -60,45 +60,19 @@
   ],
   "users": [
     {
-      "name": "Bob223",
-      "userId": "5343413",
+      "name": "Bob",
+      "userNumber": "5343413",
       "id": 1
     },
     {
       "name": "mary",
       "id": 2,
-      "userId": 8473639
+      "userNumber": 8473639
     },
     {
       "name": "iddo",
-      "userId": 2342354,
+      "userNumber": 2342354,
       "id": 3
-    },
-    {
-      "name": "Jim",
-      "userId": "5555",
-      "id": 4
-    },
-    {
-      "name": "JJJ",
-      "userId": "5555",
-      "id": 5
-    },
-    {
-      "name": "YoYo",
-      "userId": "999",
-      "id": 6
-    },
-    {
-      "name": "aaa",
-      "userId": "99",
-      "favoritesBooks": [],
-      "id": 7
-    },
-    {
-      "name": "Ron123",
-      "userId": "78987",
-      "id": 8
     }
   ]
 }

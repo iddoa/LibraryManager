@@ -11,10 +11,10 @@ class NewUserDialogButton extends React.Component {
         this.state = {
             open: false,
             username: this.props.user && this.props.user.name || "",
-            userId: this.props.user && this.props.user.userId || "",
+            userNumber: this.props.user && this.props.user.userNumber || "",
             errors: {
                 username: false,
-                userId: false
+                userNumber: false
             }
         };
     }
@@ -22,10 +22,10 @@ class NewUserDialogButton extends React.Component {
         this.setState({
             open: open,
             username: open && this.props.user && this.props.user.name || "",
-            userId: open && this.props.user && this.props.user.userId || "",
+            userNumber: open && this.props.user && this.props.user.userNumber || "",
             errors: {
                 username: false,
-                userId: false
+                userNumber: false
             }
         });
     }
@@ -49,14 +49,14 @@ class NewUserDialogButton extends React.Component {
     validateForm() {
         const errors = {
             username: this.state.username === "",
-            userId: this.state.userId === ""
+            userNumber: this.state.userNumber === ""
         }
         this.setState({errors: errors});
         return Object.values(errors).every(x => !x);
     }
     handleSubmit() {
         if (this.validateForm()) {
-            const newUser = {name: this.state.username, userId: this.state.userId};
+            const newUser = {name: this.state.username, userNumber: this.state.userNumber};
             if (this.props.editMode) {
                 newUser["id"] = this.props.user.id
             }
@@ -84,7 +84,7 @@ class NewUserDialogButton extends React.Component {
                     disableSubmit={
                         this.props.user &&
                         this.state.username === this.props.user.name &&
-                        this.state.userId === this.props.user.userId
+                        this.state.userNumber === this.props.user.userNumber
                     }
                 />
             </div>

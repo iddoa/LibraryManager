@@ -30,7 +30,7 @@ export default function UserItem(props) {
             }
         >
             <ListItemButton onClick={() => props.userClicked(props.user)} selected={props.isSelected}>
-                <ListItemText primary={props.user.name} secondary={props.user.userId} className={"user-text"}/>
+                <ListItemText primary={props.user.name} secondary={props.user.userNumber} className={"user-text"}/>
             </ListItemButton>
         </ListItem>
     );

@@ -28,10 +28,10 @@ export default function NewUserDialog(props) {
                 id="new-user-id"
                 label="Id#"
                 variant="outlined"
-                defaultValue={props.user ? props.user.userId : ""}
-                onChange={(event) => props.updateUser({userId: event.target.value})}
-                error={props.errors.userId}
-                helperText={props.errors.userId ? "Required" : ""}
+                defaultValue={props.user ? props.user.userNumber : ""}
+                onChange={(event) => props.updateUser({userNumber: event.target.value})}
+                error={props.errors.userNumber}
+                helperText={props.errors.userNumber ? "Required" : ""}
 
             />
         </DialogContent>);
