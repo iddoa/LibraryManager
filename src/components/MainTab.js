@@ -16,8 +16,7 @@ export default function MainTab(props) {
             .then(result => {
                 setLoading(false);
                 setUsers(result);
-            })
-            .catch(console.log);
+            });
     }, []);
 
     useEffect(() => {
@@ -42,14 +41,14 @@ export default function MainTab(props) {
         deleteUser(id).then(() => {
             const updatedUsers = users.filter(user => user.id !== id);
             setUsers(updatedUsers)
-        }).catch(e => console.log(e));
+        });
     };
 
     const onAddUser = (newUser) => {
         addNewUser(newUser).then((data) => {
             const updatedUsers = [...users, data];
             setUsers(updatedUsers);
-        }).catch(e => console.log(e));
+        });
     };
 
     return (

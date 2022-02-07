@@ -95,7 +95,7 @@
         },
         {
           "id": 6,
-          "favorite": false
+          "favorite": true
         }
       ]
     },
@@ -107,26 +107,30 @@
         {
           "id": 1,
           "favorite": false
+        },
+        {
+          "id": 7,
+          "favorite": false
+        },
+        {
+          "id": 8,
+          "favorite": false
+        },
+        {
+          "id": 6,
+          "favorite": false
+        },
+        {
+          "id": 9,
+          "favorite": false
         }
       ]
     },
     {
-      "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa77",
-      "userNumber": "222",
+      "name": "Raul Abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "userNumber": "123321312312312312312312312",
       "books": [],
       "id": 4
-    },
-    {
-      "name": "adasd",
-      "userNumber": "23113211233",
-      "books": [],
-      "id": 5
-    },
-    {
-      "name": "das",
-      "userNumber": "555",
-      "books": [],
-      "id": 6
     }
   ]
 }

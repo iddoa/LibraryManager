@@ -20,7 +20,7 @@ export default function BookItem(props) {
                 secondaryAction={
                     <div style={{display: "flex"}}>
                         <Tooltip title="Favorite">
-                            <IconButton edge="end" onClick={() => props.updateFavorite()} className={"favorite-book-button"}>
+                            <IconButton edge="end" onClick={props.updateFavorite} className={"favorite-book-button"}>
                                 {favoriteIcon}
                             </IconButton>
                         </Tooltip>

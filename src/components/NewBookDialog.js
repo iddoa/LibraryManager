@@ -42,8 +42,7 @@ export default function NewBookDialog(props) {
             .then(result => {
                 setAllBooks(result);
                 setOpen(true);
-            })
-            .catch((error) => console.log(error));
+            });
     };
 
     const handleSubmit = () => {

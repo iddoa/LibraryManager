@@ -21,8 +21,7 @@ export default function BookList(props) {
                     setLoading(false);
                     const withFavs = result.map(book => ({...book, favorite: favorites.includes(book.id)}));
                     setBooks(withFavs);
-                })
-                    .catch(console.log);
+                });
             } else {
                 setBooks([]);
             }
@@ -79,7 +78,7 @@ export default function BookList(props) {
                         {(selectedUser ? selectedUser.name + "'s " : "") + "Books"}
                         <NewBookDialog
                             user={selectedUser}
-                            handleAddBooks={(booksIds) => addBooksToUser(booksIds)}/>
+                            handleAddBooks={addBooksToUser}/>
                     </ListSubheader>}>
                 {getSelectedBooksListItems()}
             </LibraryList>

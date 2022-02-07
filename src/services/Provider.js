@@ -4,7 +4,8 @@ const BOOKS_PATH = BASE_SERVER_URL + "/books";
 
 export function fetchUsers() {
     return fetch(USERS_PATH)
-        .then(res => res.json());
+        .then(response => response.json())
+        .catch(error => handleError(error));
 }
 
 export function fetchBooks(bookIds) {
@@ -13,14 +14,15 @@ export function fetchBooks(bookIds) {
         booksPath += "?" + bookIds.map(id => "id=" + id).join("&")
     }
     return fetch(booksPath)
-            .then(res => res.json());
+            .then(response => response.json())
+            .catch(error => handleError(error));
 }
 
 export function deleteUser(id) {
     const userPath = USERS_PATH + "/" + id;
     return fetch(userPath, {method: 'DELETE'})
         .then(response => response.json())
-
+        .catch(error => handleError(error));
 }
 
 export function updateUser(newUser) {
@@ -30,7 +32,8 @@ export function updateUser(newUser) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newUser)
     })
-        .then(response => response.json());
+        .then(response => response.json())
+        .catch(error => handleError(error));
 }
 
 export function addNewUser(newUser) {
@@ -39,6 +42,10 @@ export function addNewUser(newUser) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newUser)
     })
-        .then(response => response.json());
+        .then(response => response.json())
+        .catch(error => handleError(error));
 }
 
+function handleError(error) {
+    console.log(error);
+}
