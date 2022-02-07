@@ -12,7 +12,7 @@ export default function UserList(props) {
                         user={user}
                         isSelected={props.selectedUser && props.selectedUser.id === user.id}
                         userClicked={() => props.onUserSelected(user)}
-                        deleteUser={() => props.deleteUser(user)}
+                        deleteUser={() => props.deleteUser(user.id)}
                         editUser={(updatedUser) => props.editUser(updatedUser)}
                     />
                 </div>

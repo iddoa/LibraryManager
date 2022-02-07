@@ -1,4 +1,4 @@
-import {fetchUsers, updateUser, deleteUser, addNewUser} from "./Provider";
+import {fetchUsers, updateUser, deleteUser, addNewUser} from "../services/Provider";
 import React, { useState, useEffect } from 'react';
 import BookList from "./BookList";
 import Divider from '@mui/material/Divider';
@@ -23,9 +23,9 @@ export default function MainTab(props) {
     useEffect(() => {
         const updatedSelected = users.find(user => user && selectedUser && user.id === selectedUser.id);
         setSelectedUser(updatedSelected)
-    }, [users]);
+    }, [users, selectedUser]);
 
-    const onChangeUser = (newUser) => {
+    const onUpdateUser = (newUser) => {
         updateUser(newUser).then(newUser => {
             const updatedUsers = users
                 .map(user => {
@@ -60,7 +60,7 @@ export default function MainTab(props) {
                 selectedUser={selectedUser}
                 addUser={onAddUser}
                 deleteUser={onDeleteUser}
-                editUser={onChangeUser}
+                editUser={onUpdateUser}
             >
                 <NewUserDialogButton
                     handleSubmit={onAddUser}
@@ -71,7 +71,7 @@ export default function MainTab(props) {
             <div className="books app-list">
                 <BookList
                     user={selectedUser}
-                    onUserChange={onChangeUser}
+                    onUserChange={onUpdateUser}
                 />
             </div>
         </div>

@@ -7,8 +7,6 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import Tooltip from '@mui/material/Tooltip';
 import RemoveBookButton from "./RemoveBookButton";
-import './BookItem.css';
-
 
 export default function BookItem(props) {
     const book = props.book;
@@ -20,7 +18,7 @@ export default function BookItem(props) {
                 key={book.id}
                 divider={true}
                 secondaryAction={
-                    <div className={"book-item-buttons"}>
+                    <div style={{display: "flex"}}>
                         <Tooltip title="Favorite">
                             <IconButton edge="end" onClick={() => props.updateFavorite()} className={"favorite-book-button"}>
                                 {favoriteIcon}

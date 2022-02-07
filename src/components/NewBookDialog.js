@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Button from '@mui/material/Button';
 import LibraryDialog from "./LibraryDialog";
-import AvialableBookItem from "./AvailableBookItem";
+import AvialableBookItem from "./NewBookItem";
 import List from '@mui/material/List';
-import {fetchBooks} from "./Provider";
+import {fetchBooks} from "../services/Provider";
+import DialogContent from '@mui/material/DialogContent';
 
-export default function BorrowBookDialogHandler(props) {
+export default function NewBookDialog(props) {
     const [open, setOpen] = useState(false);
     const [checked, setChecked] = useState([]);
     const [allBooks, setAllBooks] = useState([]);
@@ -52,9 +53,12 @@ export default function BorrowBookDialogHandler(props) {
     };
 
     const dialogContent = (
-        <List>
-            {bookItems}
-        </List>
+        <DialogContent>
+            <List style={{maxHeight: "500px"}}>
+                {bookItems}
+            </List>
+        </DialogContent>
+
     );
     const name = props.user ? props.user.name : "";
 

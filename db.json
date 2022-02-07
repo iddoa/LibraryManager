@@ -39,11 +39,26 @@
       "id": 8,
       "title": "The Lord of the Rings: The Return Of The King",
       "author": "J.R.R Tolkien"
+    },
+    {
+      "id": 9,
+      "title": "Everyone Poops",
+      "author": "Taro Gomi"
+    },
+    {
+      "id": 10,
+      "title": "The Very Hungry Caterpillar",
+      "author": "Eric Carle"
+    },
+    {
+      "id": 11,
+      "title": "Alice's Adventures in Wonderland",
+      "author": "Lewis Carroll"
     }
   ],
   "users": [
     {
-      "name": "Bob23",
+      "name": "Bob",
       "userNumber": "5343413",
       "id": 1,
       "books": [
@@ -57,26 +72,26 @@
         },
         {
           "id": 5,
-          "favorite": false
+          "favorite": true
         },
         {
           "id": 2,
+          "favorite": false
+        },
+        {
+          "id": 1,
           "favorite": false
         }
       ]
     },
     {
-      "name": "mary32",
+      "name": "Mary",
       "id": 2,
       "userNumber": 8473639,
       "books": [
         {
           "id": 2,
-          "favorite": false
-        },
-        {
-          "id": 5,
-          "favorite": false
+          "favorite": true
         },
         {
           "id": 6,
@@ -96,29 +111,10 @@
       ]
     },
     {
-      "name": "aaa",
-      "userNumber": "333",
-      "books": [
-        {
-          "id": 3,
-          "favorite": false
-        },
-        {
-          "id": 4,
-          "favorite": false
-        },
-        {
-          "id": 5,
-          "favorite": false
-        }
-      ],
-      "id": 4
-    },
-    {
-      "name": "a",
-      "userNumber": "2",
+      "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa7777777777777777777777777777777777777777777777777777777777777",
+      "userNumber": "222",
       "books": [],
-      "id": 5
+      "id": 4
     }
   ]
 }

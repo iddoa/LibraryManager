@@ -1,8 +1,0 @@
-.user-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.user-item-buttons {
-    display: flex;
-}

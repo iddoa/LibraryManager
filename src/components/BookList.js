@@ -1,7 +1,7 @@
 import LibraryList from "./LibraryList";
 import ListSubheader from "@mui/material/ListSubheader/ListSubheader";
-import BorrowBookDialogHandler from "./BorrowBookDialogHandler";
-import {fetchBooks} from "./Provider";
+import NewBookDialog from "./NewBookDialog";
+import {fetchBooks} from "../services/Provider";
 import BookItem from "./BookItem";
 import React, { useState, useEffect } from 'react';
 
@@ -17,11 +17,11 @@ export default function BookList(props) {
                 const favorites = selectedUser && selectedUser.books.filter(book => book.favorite).map(book => book.id);
                 setLoading(true);
                 fetchBooks(bookIds)
-                    .then(result => {
+                .then(result => {
                     setLoading(false);
                     const withFavs = result.map(book => ({...book, favorite: favorites.includes(book.id)}));
                     setBooks(withFavs);
-                    })
+                })
                     .catch(console.log);
             } else {
                 setBooks([]);
@@ -59,6 +59,7 @@ export default function BookList(props) {
                     <BookItem
                         key={"book-item"+book.id}
                         book={book}
+                        favorite={book.favorite}
                         removeBook={() => removeBook(book.id)}
                         updateFavorite={() => updateFavorite(book.id)}/>
                 );
@@ -76,7 +77,7 @@ export default function BookList(props) {
                 listItems={getSelectedBooksListItems()}>
                 <ListSubheader className={"list-subheader"}>
                     {(selectedUser ? selectedUser.name + "'s " : "") + "Books"}
-                    <BorrowBookDialogHandler
+                    <NewBookDialog
                         user={selectedUser}
                         handleAddBooks={(booksIds) => addBooksToUser(booksIds)}/>
                 </ListSubheader>

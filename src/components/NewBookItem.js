@@ -6,7 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import ListItemIcon from '@mui/material/ListItemIcon';
 
 
-export default function AvailableBookItem(props) {
+export default function NewBookItem(props) {
     const book = props.book;
     return (
         <div>
@@ -16,13 +16,7 @@ export default function AvailableBookItem(props) {
                 divider={true}>
                 <ListItemButton onClick={props.handleToggle(book.id)}>
                     <ListItemIcon>
-                        <Checkbox
-                            // edge="start"
-                            // checked={checked.indexOf(value) !== -1}
-                            // tabIndex={-1}
-                            // disableRipple
-                            // inputProps={{ 'aria-labelledby': labelId }}
-                        />
+                        <Checkbox />
                     </ListItemIcon>
                     <ListItemText primary={book.title} secondary={"Author: " + book.author} />
                 </ListItemButton>

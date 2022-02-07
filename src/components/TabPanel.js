@@ -44,6 +44,18 @@ export default function VerticalTabs() {
         setValue(newValue);
     };
 
+    const underConstrunction =
+        <Typography variant="h1" component="h1"
+           style={{
+               position: "absolute",
+               top: "50%", left:"50%",
+               transform: "translate(-50%, -50%)",
+               marginRight: "-50%"}}
+        >
+            <ConstructionIcon fontSize="inherit"/>
+            Under Construction
+        </Typography>;
+
     return (
         <Box
             sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex'}}
@@ -64,18 +76,10 @@ export default function VerticalTabs() {
                 <MainTab />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Typography variant="h1" component="h1">
-                    <ConstructionIcon fontSize="inherit"/>
-                    Under Construction
-                </Typography>
+                {underConstrunction}
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <Typography variant="h1" component="h1"
-                style={{position: "absolute", top: "50%", left:"50%", transform: "translate(-50%, -50%)"}}
-                >
-                    <ConstructionIcon fontSize="inherit"/>
-                    Under Construction
-                </Typography>
+                {underConstrunction}
             </TabPanel>
         </Box>
     );
