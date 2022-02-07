@@ -100,7 +100,7 @@
       ]
     },
     {
-      "name": "iddo",
+      "name": "Iddo",
       "userNumber": 2342354,
       "id": 3,
       "books": [
@@ -125,12 +125,6 @@
           "favorite": false
         }
       ]
-    },
-    {
-      "name": "Abc",
-      "userNumber": "1213",
-      "books": [],
-      "id": 4
     }
   ]
 }
