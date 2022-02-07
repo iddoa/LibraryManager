@@ -11,7 +11,6 @@ export default function UserItem(props) {
     return (
         <ListItem
             disablePadding
-            key={props.user.id}
             divider={true}
             secondaryAction={
                 <div style={{display: "flex"}}>

@@ -4,14 +4,17 @@ import BookList from "./BookList";
 import Divider from '@mui/material/Divider';
 import UserList from "./UserList";
 import NewUserDialog from "./NewUserDialog";
-import './MainTab.css';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import './UserManager.css';
 
-export default function MainTab(props) {
+export default function UserManager(props) {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         fetchUsers()
             .then(result => {
                 setLoading(false);
@@ -25,7 +28,9 @@ export default function MainTab(props) {
     }, [users, selectedUser]);
 
     const onUpdateUser = (newUser) => {
+        setLoading(true);
         updateUser(newUser).then(newUser => {
+            setLoading(false);
             const updatedUsers = users
                 .map(user => {
                     if (user.id === newUser.id) {
@@ -38,14 +43,18 @@ export default function MainTab(props) {
     };
 
     const onDeleteUser = (id) => {
+        setLoading(true);
         deleteUser(id).then(() => {
+            setLoading(false);
             const updatedUsers = users.filter(user => user.id !== id);
             setUsers(updatedUsers)
         });
     };
 
     const onAddUser = (newUser) => {
+        setLoading(true);
         addNewUser(newUser).then((data) => {
+            setLoading(false);
             const updatedUsers = [...users, data];
             setUsers(updatedUsers);
         });
@@ -53,6 +62,12 @@ export default function MainTab(props) {
 
     return (
         <div className="app-table">
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <UserList
                 users={users}
                 onUserSelected={(selected) => setSelectedUser(selected)}

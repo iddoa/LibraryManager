@@ -6,9 +6,8 @@ export default function UserList(props) {
     const getUsersListItems = () => {
         return props.users.map((user) => {
             return (
-                <div>
+                <div key={user.id}>
                     <UserItem
-                        key={"user-item"+user.id}
                         user={user}
                         isSelected={props.selectedUser && props.selectedUser.id === user.id}
                         userClicked={() => props.onUserSelected(user)}

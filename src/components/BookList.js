@@ -7,7 +7,6 @@ import React, { useState, useEffect } from 'react';
 
 export default function BookList(props) {
     const [books, setBooks] = useState([]);
-    const [loading, setLoading] = useState(false);
     const selectedUser = props.user;
 
     useEffect(() => {
@@ -15,10 +14,8 @@ export default function BookList(props) {
             const bookIds = selectedUser.books.map(book => book.id);
             if (bookIds.length > 0) {
                 const favorites = selectedUser && selectedUser.books.filter(book => book.favorite).map(book => book.id);
-                setLoading(true);
                 fetchBooks(bookIds)
                 .then(result => {
-                    setLoading(false);
                     const withFavs = result.map(book => ({...book, favorite: favorites.includes(book.id)}));
                     setBooks(withFavs);
                 });
