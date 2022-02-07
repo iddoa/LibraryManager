@@ -23,11 +23,12 @@ export default function UserList(props) {
     return (
         <div className="users app-list">
             <LibraryList
-                listItems={getUsersListItems()}>
-                <ListSubheader className={"list-subheader"}>
-                    Users
-                    {props.children}
-                </ListSubheader>
+                subheader={
+                    <ListSubheader className={"list-subheader"}>
+                        Users
+                        {props.children}
+                    </ListSubheader>}>
+                {getUsersListItems()}
             </LibraryList>
         </div>
     )

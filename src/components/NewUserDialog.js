@@ -4,121 +4,103 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import TextField from '@mui/material/TextField';
-import DialogContent from '@mui/material/DialogContent';
 import LibraryDialog from "./LibraryDialog";
+import {useState, useEffect} from "react";
 
-class NewUserDialog extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: false,
-            username: this.props.user ? this.props.user.name : "",
-            userNumber: this.props.user ? this.props.user.userNumber : "",
-            errors: {
-                username: false,
-                userNumber: false
-            }
-        };
-    }
-    toggleState(open) {
-        this.setState({
-            open: open,
-            username: this.props.user ? this.props.user.name : "",
-            userNumber: this.props.user ? this.props.user.userNumber : "",
-            errors: {
-                username: false,
-                userNumber: false
-            }
-        });
-    }
+export default function NewUserDialog(props) {
+    const [open, setOpen] = useState(false);
+    const [username, setUsername] = useState(props.user ? props.user.name : "");
+    const [userNumber, setUserNumber] = useState(props.user ? props.user.userNumber : "");
+    const [nameError, setNameError] = useState(false);
+    const [numberError, setNumberError] = useState(false);
 
-    getButton() {
-        if (this.props.editMode) {
+    useEffect(() => {
+        setUsername(props.user ? props.user.name : "");
+        setUserNumber(props.user ? props.user.userNumber : "");
+        setNameError(false);
+        setNumberError(false);
+    }, [open, props.user]);
+
+    const getButton = () => {
+        if (props.editMode) {
             return (
-                <IconButton edge="end" style={{marginRight: "0px"}} className={"edit-user-button"} onClick={() => this.toggleState(true)}>
+                <IconButton edge="end" style={{marginRight: "0px"}} className={"edit-user-button"} onClick={() => setOpen(true)}>
                     <EditIcon />
                 </IconButton>
             );
         } else {
             return (
-                <Button variant="outlined" onClick={() => this.toggleState(true)} endIcon={<PersonAddIcon />}>
+                <Button variant="outlined" onClick={() => setOpen(true)} endIcon={<PersonAddIcon />}>
                     New User
                 </Button>
             )
         }
     };
 
-    validateForm() {
-        const errors = {
-            username: this.state.username === "",
-            userNumber: this.state.userNumber === ""
-        }
-        this.setState({errors: errors});
-        return Object.values(errors).every(x => !x);
-    }
+    const validateForm = () => {
+        const errorName = username === "";
+        const errorNumber = userNumber === "";
+        setNameError(errorName);
+        setNumberError(errorNumber);
+        return !errorName && !errorNumber;
+    };
 
-    handleSubmit() {
-        if (this.validateForm()) {
+    const handleSubmit = () => {
+        if (validateForm()) {
             let newUser;
-            if (this.props.editMode) {
-                newUser = {...this.props.user, name: this.state.username, userNumber: this.state.userNumber}
+            if (props.editMode) {
+                newUser = {...props.user, name: username, userNumber: userNumber}
             } else {
-                newUser = {name: this.state.username, userNumber: this.state.userNumber, books: []}
+                newUser = {name: username, userNumber: userNumber, books: []}
             }
-            this.props.handleSubmit(newUser);
-            this.toggleState(false);
+            props.handleSubmit(newUser);
+            setOpen(false);
         }
-    }
+    };
 
-    render() {
-        const submitButtonText = this.props.editMode ? "Apply" : "Add New User";
-        const dialogTitle = this.props.editMode ? "Edit User" : "New User";
-        return (
-            <div>
-                {this.getButton()}
-                <LibraryDialog
-                    submitButtonText={submitButtonText}
-                    dialogTitle={dialogTitle}
-                    handleClose={() => this.toggleState(false)}
-                    handleSubmit={() => this.handleSubmit()}
-                    open={this.state.open}
-                    disableSubmit={
-                        this.props.user &&
-                        this.state.username === this.props.user.name &&
-                        this.state.userNumber === this.props.user.userNumber
-                    }>
-                    <DialogContent>
-                        <TextField
-                            required
-                            autoFocus
-                            fullWidth
-                            margin="dense"
-                            id="new-user-name"
-                            label="Name"
-                            variant="outlined"
-                            defaultValue={this.props.user ? this.props.user.name : ""}
-                            onChange={(event) => this.setState({username: event.target.value})}
-                            error={this.state.errors.username}
-                            helperText={this.state.errors.username ? "Required" : ""}
-                        />
-                        <TextField
-                            required
-                            fullWidth
-                            margin="dense"
-                            id="new-user-id"
-                            label="Id#"
-                            variant="outlined"
-                            defaultValue={this.props.user ? this.props.user.userNumber : ""}
-                            onChange={(event) => this.setState({userNumber: event.target.value})}
-                            error={this.state.errors.userNumber}
-                            helperText={this.state.errors.userNumber ? "Required" : ""}
-
-                        />
-                    </DialogContent>
-                </LibraryDialog>
-            </div>
-        );
-    }
+    return (
+        <div>
+            {getButton()}
+            <LibraryDialog
+                submitButtonText={props.editMode ? "Apply" : "Add New User"}
+                dialogTitle={props.editMode ? "Edit User" : "New User"}
+                handleClose={() => setOpen(false)}
+                handleSubmit={() => handleSubmit()}
+                open={open}
+                disableSubmit={
+                    props.user &&
+                    username === props.user.name &&
+                    userNumber === props.user.userNumber
+                }>
+                    <TextField
+                        required
+                        autoFocus
+                        fullWidth
+                        margin="dense"
+                        id="new-user-name"
+                        label="Name"
+                        variant="outlined"
+                        defaultValue={props.user ? props.user.name : ""}
+                        onChange={(event) => setUsername(event.target.value)}
+                        error={nameError}
+                        helperText={nameError ? "Required" : ""}
+                        inputProps={{maxLength: 40}}
+                    />
+                    <TextField
+                        type="number"
+                        required
+                        fullWidth
+                        margin="dense"
+                        id="new-user-id"
+                        label="Id#"
+                        variant="outlined"
+                        defaultValue={props.user ? props.user.userNumber : ""}
+                        onChange={(event) => setUserNumber(event.target.value)}
+                        error={numberError}
+                        helperText={numberError ? "Required" : ""}
+                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxLength: 20}}
+                    />
+            </LibraryDialog>
+        </div>
+    );
 }
-
-export default NewUserDialog;

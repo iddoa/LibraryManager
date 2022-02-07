@@ -5,7 +5,6 @@ import LibraryDialog from "./LibraryDialog";
 import AvialableBookItem from "./NewBookItem";
 import List from '@mui/material/List';
 import {fetchBooks} from "../services/Provider";
-import DialogContent from '@mui/material/DialogContent';
 
 export default function NewBookDialog(props) {
     const [open, setOpen] = useState(false);
@@ -52,14 +51,6 @@ export default function NewBookDialog(props) {
         handleClose();
     };
 
-    const dialogContent = (
-        <DialogContent>
-            <List style={{maxHeight: "500px"}}>
-                {bookItems}
-            </List>
-        </DialogContent>
-
-    );
     const name = props.user ? props.user.name : "";
 
     return (
@@ -78,7 +69,9 @@ export default function NewBookDialog(props) {
                 handleClose={handleClose}
                 handleSubmit={handleSubmit}
                 open={open}>
-                {dialogContent}
+                <List style={{maxHeight: "500px"}}>
+                    {bookItems}
+                </List>
             </LibraryDialog>
         </div>
     )

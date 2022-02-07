@@ -45,7 +45,7 @@ export default function BookList(props) {
     };
 
     const removeBook = (bookId) => {
-        const newSelectedBooks = selectedUser.books.filter(book => book.id != bookId);
+        const newSelectedBooks = selectedUser.books.filter(book => book.id !== bookId);
         const newUser = {...selectedUser};
         newUser.books = newSelectedBooks;
         props.onUserChange(newUser);
@@ -74,13 +74,14 @@ export default function BookList(props) {
     return (
         <div className="books app-list">
             <LibraryList
-                listItems={getSelectedBooksListItems()}>
-                <ListSubheader className={"list-subheader"}>
-                    {(selectedUser ? selectedUser.name + "'s " : "") + "Books"}
-                    <NewBookDialog
-                        user={selectedUser}
-                        handleAddBooks={(booksIds) => addBooksToUser(booksIds)}/>
-                </ListSubheader>
+                subheader={
+                    <ListSubheader className={"list-subheader"}>
+                        {(selectedUser ? selectedUser.name + "'s " : "") + "Books"}
+                        <NewBookDialog
+                            user={selectedUser}
+                            handleAddBooks={(booksIds) => addBooksToUser(booksIds)}/>
+                    </ListSubheader>}>
+                {getSelectedBooksListItems()}
             </LibraryList>
         </div>
     );

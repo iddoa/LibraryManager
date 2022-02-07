@@ -5,9 +5,9 @@ import Divider from '@mui/material/Divider';
 export default function LibraryList(props) {
     return (
         <div>
-            <List subheader={props.children}>
+            <List subheader={props.subheader}>
                 <Divider />
-                {props.listItems}
+                {props.children}
             </List>
         </div>
     );

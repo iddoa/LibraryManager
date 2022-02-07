@@ -91,7 +91,7 @@
       "books": [
         {
           "id": 2,
-          "favorite": true
+          "favorite": false
         },
         {
           "id": 6,
@@ -117,14 +117,14 @@
       "id": 4
     },
     {
-      "name": "a2",
-      "userNumber": "123",
+      "name": "adasd",
+      "userNumber": "23113211233",
       "books": [],
       "id": 5
     },
     {
-      "name": "asd",
-      "userNumber": "123",
+      "name": "das",
+      "userNumber": "555",
       "books": [],
       "id": 6
     }
