@@ -8,7 +8,7 @@ import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import Tooltip from '@mui/material/Tooltip';
 import RemoveBookButton from "./RemoveBookButton";
 
-export default function BookItem(props) {
+export default function BookListItem(props) {
     const book = props.book;
     const favoriteIcon = props.favorite ? (<StarIcon />) : (<StarBorderOutlinedIcon />) ;
     return (

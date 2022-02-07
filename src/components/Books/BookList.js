@@ -1,8 +1,8 @@
-import LibraryList from "./LibraryList";
+import LibraryList from "../LibraryList";
 import ListSubheader from "@mui/material/ListSubheader/ListSubheader";
-import NewBookDialog from "./NewBookDialog";
-import {fetchBooks} from "../services/Provider";
-import BookItem from "./BookItem";
+import BookDialog from "./BookDialog";
+import {fetchBooks} from "../../services/Provider";
+import BookListItem from "./BookListItem";
 import React, { useState, useEffect } from 'react';
 
 export default function BookList(props) {
@@ -52,7 +52,7 @@ export default function BookList(props) {
         return books
             .map((book) => {
                 return (
-                    <BookItem
+                    <BookListItem
                         key={"book-item"+book.id}
                         book={book}
                         favorite={book.favorite}
@@ -73,7 +73,7 @@ export default function BookList(props) {
                 subheader={
                     <ListSubheader className={"list-subheader"}>
                         {(selectedUser ? selectedUser.name + "'s " : "") + "Books"}
-                        <NewBookDialog
+                        <BookDialog
                             user={selectedUser}
                             handleAddBooks={addBooksToUser}/>
                     </ListSubheader>}>

@@ -105,10 +105,6 @@
       "id": 3,
       "books": [
         {
-          "id": 1,
-          "favorite": false
-        },
-        {
           "id": 7,
           "favorite": false
         },
@@ -121,7 +117,7 @@
           "favorite": false
         },
         {
-          "id": 9,
+          "id": 2,
           "favorite": false
         }
       ]

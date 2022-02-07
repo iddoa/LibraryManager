@@ -4,10 +4,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import TextField from '@mui/material/TextField';
-import LibraryDialog from "./LibraryDialog";
+import LibraryDialog from "../LibraryDialog";
 import {useState, useEffect} from "react";
 
-export default function NewUserDialog(props) {
+export default function UserDialog(props) {
     const [open, setOpen] = useState(false);
     const [username, setUsername] = useState(props.user ? props.user.name : "");
     const [userNumber, setUserNumber] = useState(props.user ? props.user.userNumber : "");

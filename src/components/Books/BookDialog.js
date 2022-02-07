@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Button from '@mui/material/Button';
-import LibraryDialog from "./LibraryDialog";
-import AvialableBookItem from "./NewBookItem";
+import LibraryDialog from "../LibraryDialog";
+import AvialableBookItem from "./BookDialogItem";
 import List from '@mui/material/List';
-import {fetchBooks} from "../services/Provider";
+import {fetchBooks} from "../../services/Provider";
 
-export default function NewBookDialog(props) {
+export default function BookDialog(props) {
     const [open, setOpen] = useState(false);
     const [checked, setChecked] = useState([]);
     const [allBooks, setAllBooks] = useState([]);

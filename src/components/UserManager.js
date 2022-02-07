@@ -1,9 +1,9 @@
 import {fetchUsers, updateUser, deleteUser, addNewUser} from "../services/Provider";
 import React, { useState, useEffect } from 'react';
-import BookList from "./BookList";
+import BookList from "./Books/BookList";
 import Divider from '@mui/material/Divider';
-import UserList from "./UserList";
-import NewUserDialog from "./NewUserDialog";
+import UserList from "./Users/UserList";
+import UserDialog from "./Users/UserDialog";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import './UserManager.css';
@@ -76,7 +76,7 @@ export default function UserManager(props) {
                 deleteUser={onDeleteUser}
                 editUser={onUpdateUser}
             >
-                <NewUserDialog
+                <UserDialog
                     handleSubmit={onAddUser}
                     editMode={false}
                 />

@@ -6,7 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import ListItemIcon from '@mui/material/ListItemIcon';
 
 
-export default function NewBookItem(props) {
+export default function BookDialogItem(props) {
     const book = props.book;
     return (
         <div>

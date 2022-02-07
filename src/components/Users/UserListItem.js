@@ -5,16 +5,16 @@ import ListItemButton from '@mui/material/ListItemButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import NewUserDialog from "./NewUserDialog";
+import UserDialog from "./UserDialog";
 
-export default function UserItem(props) {
+export default function UserListItem(props) {
     return (
         <ListItem
             disablePadding
             divider={true}
             secondaryAction={
                 <div style={{display: "flex"}}>
-                    <NewUserDialog
+                    <UserDialog
                         user={props.user}
                         editMode={true}
                         handleSubmit={(updatedUser) => props.editUser(updatedUser)}

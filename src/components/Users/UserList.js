@@ -1,5 +1,5 @@
-import UserItem from "./UserItem";
-import LibraryList from "./LibraryList";
+import UserListItem from "./UserListItem";
+import LibraryList from "../LibraryList";
 import ListSubheader from '@mui/material/ListSubheader';
 
 export default function UserList(props) {
@@ -7,7 +7,7 @@ export default function UserList(props) {
         return props.users.map((user) => {
             return (
                 <div key={user.id}>
-                    <UserItem
+                    <UserListItem
                         user={user}
                         isSelected={props.selectedUser && props.selectedUser.id === user.id}
                         userClicked={() => props.onUserSelected(user)}
