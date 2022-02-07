@@ -74,12 +74,12 @@ export default function NewBookDialog(props) {
             </Button>
             <LibraryDialog
                 submitButtonText={"Apply"}
-                dialogContent={dialogContent}
                 dialogTitle={"Add Books for " + name}
                 handleClose={handleClose}
                 handleSubmit={handleSubmit}
-                open={open}
-            />
+                open={open}>
+                {dialogContent}
+            </LibraryDialog>
         </div>
     )
 }

@@ -8,7 +8,7 @@ export default function LibraryDialog(props) {
     return (
         <Dialog open={props.open} onClose={props.handleClose} scroll="paper">
             <DialogTitle>{props.dialogTitle}</DialogTitle>
-            {props.dialogContent}
+            {props.children}
             <div className="dialog-footer">
                 <DialogActions>
                     <Button onClick={() => props.handleClose()}>Cancel</Button>

@@ -63,10 +63,6 @@
       "id": 1,
       "books": [
         {
-          "id": 7,
-          "favorite": false
-        },
-        {
           "id": 8,
           "favorite": false
         },
@@ -76,10 +72,14 @@
         },
         {
           "id": 2,
-          "favorite": false
+          "favorite": true
         },
         {
           "id": 1,
+          "favorite": true
+        },
+        {
+          "id": 6,
           "favorite": false
         }
       ]
@@ -111,10 +111,22 @@
       ]
     },
     {
-      "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa7777777777777777777777777777777777777777777777777777777777777",
+      "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa77",
       "userNumber": "222",
       "books": [],
       "id": 4
+    },
+    {
+      "name": "a2",
+      "userNumber": "123",
+      "books": [],
+      "id": 5
+    },
+    {
+      "name": "asd",
+      "userNumber": "123",
+      "books": [],
+      "id": 6
     }
   ]
 }

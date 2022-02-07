@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import BookList from "./BookList";
 import Divider from '@mui/material/Divider';
 import UserList from "./UserList";
-import NewUserDialogButton from "./NewUserDialogButton";
+import NewUserDialog from "./NewUserDialog";
 import './MainTab.css';
 
 export default function MainTab(props) {
@@ -62,7 +62,7 @@ export default function MainTab(props) {
                 deleteUser={onDeleteUser}
                 editUser={onUpdateUser}
             >
-                <NewUserDialogButton
+                <NewUserDialog
                     handleSubmit={onAddUser}
                     editMode={false}
                 />

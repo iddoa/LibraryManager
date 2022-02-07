@@ -5,7 +5,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import NewUserDialogButton from "./NewUserDialogButton";
+import NewUserDialog from "./NewUserDialog";
 
 export default function UserItem(props) {
     return (
@@ -15,7 +15,7 @@ export default function UserItem(props) {
             divider={true}
             secondaryAction={
                 <div style={{display: "flex"}}>
-                    <NewUserDialogButton
+                    <NewUserDialog
                         user={props.user}
                         editMode={true}
                         handleSubmit={(updatedUser) => props.editUser(updatedUser)}
