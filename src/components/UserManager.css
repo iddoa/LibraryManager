@@ -1,0 +1,14 @@
+.app-table {
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+.app-list {
+    flex: 1;
+}
+.list-subheader  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
