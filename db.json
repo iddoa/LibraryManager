@@ -58,7 +58,7 @@
   ],
   "users": [
     {
-      "name": "Bobsadd",
+      "name": "John Doe",
       "userNumber": "5343413",
       "id": 1,
       "books": [
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "name": "Mary",
+      "name": "Jim James",
       "id": 2,
       "userNumber": 8473639,
       "books": [
@@ -100,13 +100,13 @@
       ]
     },
     {
-      "name": "Iddo",
+      "name": "Seven Eleven",
       "userNumber": 2342354,
       "id": 3,
       "books": [
         {
           "id": 7,
-          "favorite": false
+          "favorite": true
         },
         {
           "id": 8,
@@ -121,6 +121,25 @@
           "favorite": false
         }
       ]
+    },
+    {
+      "name": "Mary Jane",
+      "userNumber": "56473829",
+      "books": [
+        {
+          "id": 6,
+          "favorite": true
+        },
+        {
+          "id": 5,
+          "favorite": false
+        },
+        {
+          "id": 9,
+          "favorite": false
+        }
+      ],
+      "id": 4
     }
   ]
 }

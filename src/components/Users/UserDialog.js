@@ -13,6 +13,8 @@ export default function UserDialog(props) {
     const [userNumber, setUserNumber] = useState(props.user ? props.user.userNumber : "");
     const [nameError, setNameError] = useState(false);
     const [numberError, setNumberError] = useState(false);
+    const MAX_NAME_LENGTH = 40;
+    const MAX_ID_LENGTH = 10;
 
     useEffect(() => {
         setUsername(props.user ? props.user.name : "");
@@ -80,11 +82,12 @@ export default function UserDialog(props) {
                         id="new-user-name"
                         label="Name"
                         variant="outlined"
+                        autoComplete="off"
                         defaultValue={props.user ? props.user.name : ""}
                         onChange={(event) => setUsername(event.target.value)}
                         error={nameError}
-                        helperText={nameError ? "Required" : ""}
-                        inputProps={{maxLength: 40}}
+                        helperText={"Maximum "+MAX_NAME_LENGTH+" characters"}
+                        inputProps={{maxLength: MAX_NAME_LENGTH}}
                     />
                     <TextField
                         type="number"
@@ -92,13 +95,15 @@ export default function UserDialog(props) {
                         fullWidth
                         margin="dense"
                         id="new-user-id"
-                        label="Id#"
+                        label="ID"
                         variant="outlined"
+                        autoComplete="off"
                         defaultValue={props.user ? props.user.userNumber : ""}
                         onChange={(event) => setUserNumber(event.target.value)}
+                        onInput={e => e.target.value = e.target.value.slice(0,MAX_ID_LENGTH)}
                         error={numberError}
-                        helperText={numberError ? "Required" : ""}
-                        inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', maxLength: 20}}
+                        helperText={"Maximum "+MAX_ID_LENGTH+" characters"}
+                        inputProps={{ pattern: '[0-9]*'}}
                     />
             </LibraryDialog>
         </div>
